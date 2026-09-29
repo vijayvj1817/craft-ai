@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Image • ComicCraft</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <main class="shell narrow">
+    <section class="card form-card">
+      <p class="eyebrow">DEVELOPER UTILITY</p>
+      <h1>Test Image Generation</h1>
+      <form action="/test-image" method="post">
+        <label>
+          Prompt
+          <textarea name="prompt" required>{{ prompt }}</textarea>
+        </label>
+        <div class="actions">
+          <button class="button primary" type="submit">Generate Image</button>
+          <a class="button ghost" href="/">Back Home</a>
+        </div>
+      </form>
+    </section>
+    {% if image_url %}
+    <section class="card panel-card">
+      <h2>Generated Image</h2>
+      <img src="{{ image_url }}" alt="Generated image">
+    </section>
+    {% endif %}
+  </main>
+</body>
+</html>

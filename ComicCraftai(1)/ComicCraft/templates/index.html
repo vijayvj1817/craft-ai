@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ app_name }} • Create</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body class="landing">
+  <main class="shell">
+    <section class="hero card">
+      <div>
+        <p class="eyebrow">AI COMIC STORY CREATOR</p>
+        <h1>Turn one idea into a five-panel comic.</h1>
+        <p class="lead">Describe your story, choose a hero, setting, tone, and art style. ComicCraft handles the outline, narration, images, layout, and PDF export.</p>
+      </div>
+      <div class="badge">Gemini + Stable Diffusion</div>
+    </section>
+
+    <section class="card form-card">
+      <form action="/generate" method="post" id="comic-form">
+        <div class="grid two">
+          <label>
+            Story Prompt
+            <textarea name="story_prompt" required maxlength="1200" placeholder="A brave fox explores an enchanted forest and discovers a hidden clock...">A brave fox explores an enchanted forest and discovers a hidden clock.</textarea>
+          </label>
+          <label>
+            Main Character Name
+            <input name="character_name" required maxlength="80" value="Ember">
+          </label>
+        </div>
+
+        <div class="grid three">
+          <label>
+            Setting
+            <select name="setting">
+              {% for item in settings %}<option value="{{ item }}">{{ item|title }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>
+            Story Tone
+            <select name="tone">
+              {% for item in tones %}<option value="{{ item }}">{{ item|title }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>
+            Art Style
+            <select name="art_style">
+              {% for item in styles %}<option value="{{ item }}" {% if item == 'comic book' %}selected{% endif %}>{{ item|title }}</option>{% endfor %}
+            </select>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="button primary" type="submit">✨ Create My Comic</button>
+          <a class="button secondary" href="/test-image">Test Image Generation</a>
+          <a class="button ghost" href="/docs">API Docs</a>
+        </div>
+        <p class="hint">Tip: Keep your story prompt specific enough to give the image model strong visual anchors.</p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ result.title }} • Preview</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <main class="shell wide">
+    <header class="preview-header">
+      <div>
+        <p class="eyebrow">YOUR COMIC PREVIEW</p>
+        <h1>{{ result.title }}</h1>
+        <p class="lead">{{ result.request.story_prompt }}</p>
+      </div>
+      <div class="preview-actions">
+        <button class="button primary" type="button" id="download-btn" data-download-url="{{ result.pdf_url }}" data-filename="{{ result.pdf_path.rsplit('/', 1)[-1] }}">📥 Download Your Comic as PDF</button>
+        <a class="button ghost" href="/">Create Another</a>
+      </div>
+    </header>
+
+    <section class="comic-grid">
+      {% for panel in result.layout %}
+      <article class="panel-card card">
+        <div class="panel-label">PANEL {{ panel.panel }}</div>
+        <h2>{{ panel.title }}</h2>
+        <img src="{{ panel.image_url }}" alt="Comic panel {{ panel.panel }}">
+        <p class="scene">{{ panel.scene_description }}</p>
+        {% if panel.caption %}<p class="caption">{{ panel.caption }}</p>{% endif %}
+        <div class="story-copy">
+          <p>{{ panel.narration }}</p>
+          {% for line in panel.dialogue %}<div class="dialogue">{{ line }}</div>{% endfor %}
+        </div>
+        <details>
+          <summary>Image prompt reference</summary>
+          <code>{{ panel.image_prompt }}</code>
+        </details>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Optional self-hosted Stable Diffusion/Diffusers support.
+# Install after requirements.txt when IMAGE_PROVIDER=diffusers.
+torch>=2.4,<3
+diffusers>=0.40,<1
+transformers>=4.45,<5
+accelerate>=1.0,<2
+safetensors>=0.4,<1
